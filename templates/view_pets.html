@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All Pets</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background: #fdf6f0; }
+        table { width: 100%; border-collapse: collapse; background: #fff; }
+        th { background: #5d4037; color: #fff; text-align: left; padding: 12px; }
+        td { padding: 12px; border-bottom: 1px solid #eee; }
+        .tag { padding: 4px 10px; border-radius: 12px; color: #fff; font-size: 13px; }
+        .ok { background: #27ae60; } .no { background: #e74c3c; }
+        .act { padding: 5px 10px; border-radius: 4px; color: #fff; text-decoration: none; font-size: 13px; }
+        .adopt { background: #e67e22; } .release { background: #2980b9; } .del { background: #c0392b; }
+    </style>
+</head>
+<body>
+    <p><a href="/">🏠 Home</a> &nbsp; <a href="/add">➕ Add Pet</a></p>
+    <h1>🐶 All Pets</h1>
+    <table>
+        <tr><th>ID</th><th>Name</th><th>Type</th><th>Status</th><th>Actions</th></tr>
+        {% for p in pets %}
+        <tr>
+            <td>{{ p.id }}</td>
+            <td>{{ p.name }}</td>
+            <td>{{ p.type }}</td>
+            <td>{% if p.available %}<span class="tag ok">Available</span>{% else %}<span class="tag no">Adopted</span>{% endif %}</td>
+            <td>
+                {% if p.available %}<a class="act adopt" href="/adopt/{{ p.id }}">Adopt</a>
+                {% else %}<a class="act release" href="/release/{{ p.id }}">Release</a>{% endif %}
+                <a class="act del" href="/delete/{{ p.id }}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: petrescue-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: petrescue
+  template:
+    metadata:
+      labels:
+        app: petrescue
+    spec:
+      containers:
+        - name: petrescue
+          image: likithavajinepalli/pet-rescue-app:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5001
